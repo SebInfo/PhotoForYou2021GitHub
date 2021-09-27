@@ -1,6 +1,10 @@
 <?php
   session_start();
-  require_once'accessbase.php';
+  if (!isset($_SESSION['type']))
+  {
+    $_SESSION['type']="visiteur";
+  }
+  require_once ('accessbase.php');
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>
 <!DOCTYPE html>
@@ -22,6 +26,7 @@
       color:white;
     }
   </style>
+  <link href="css/perso.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -37,21 +42,57 @@
 		    <span class="navbar-toggler-icon"></span>
     	</button>
 
+      <?php
+          // On regarde le niveau d'habilitation
+          switch ($_SESSION['type']) 
+          {
+            case "client":
+              $niveauHab = "%C%";
+              break;
+            case "photographe":
+              $niveauHab = "%P%";
+              break;
+            case "visiteur":
+              $niveauHab = "%V%";
+              break;
+            case "admin":
+              $niveauHab = "%A%";
+              break;
+          }
+
+          // On récupère l'ensemble des itérations dans Menu
+          $requete = "SELECT idMenu, nomMenu, Lien from menu where Habilitation LIKE '".$niveauHab."'";
+          $instruction = $db->prepare($requete);
+          $instruction->execute();
+          $num = $instruction->fetchAll(); // Tout se trouve maintenant dans le tableau $num
+      ?>
     	<div class="collapse navbar-collapse" id="navbarCollapse">
       		<ul class="navbar-nav mr-auto">
-        	 <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="index.html">Photos</a>
-					    <div class="dropdown-menu">
-						   <a class="dropdown-item" href="acheterPhotos.php">Acheter</a>
-               <a class="dropdown-item" href="suppUser.php">Suppression User</a>
-						   <a class="dropdown-item" href="#">Vendre</a>
-						   <a class="dropdown-item" href="#">Les plus populaires</a>
-						   <a class="dropdown-item" href="#">Les nouveautés</a>
-					    </div>
-			     </li>
-        	 <li class="nav-item">
-          			<a class="nav-link" href="#">Tarifs</a>
-        	 </li>
+              <?php
+              // On va récupérer les menu de niveau 1 dont l'id est compris entre 1 et 9 -->
+              foreach ($num as $value) 
+                  {
+                    // Menu de niveau 1
+                    if (strlen($value['idMenu'])==1) 
+                    {
+                      $niv = substr($value['idMenu'], 0, 1); // On mémorise le niveau
+                      echo "<li class='nav-item dropdown'>".PHP_EOL;
+                      echo "<a class='nav-link dropdown-toggle' data-toggle='dropdown' href=".$value['Lien'].">".$value['nomMenu']."</a>".PHP_EOL;
+                      echo "<div class='dropdown-menu'>".PHP_EOL;
+                      foreach ($num as $value) 
+                      {
+                        // Sous menu
+                        if (strlen($value['idMenu'])==2 AND substr($value['idMenu'],0,1)==$niv )
+                        {
+                          echo "<a class='dropdown-item' href=".$value['Lien'].">".$value['nomMenu']."</a>".PHP_EOL;
+                        }  
+                      }
+                      echo "</div>";
+                      echo "</li>";
+                    }
+                  }
+              ?>
+            </li>
       		</ul>
 
 		      <!-- formulaire de recherche -->

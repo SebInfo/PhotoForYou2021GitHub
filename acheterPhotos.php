@@ -1,8 +1,12 @@
 <?php
 include ("include/entete.inc.php");
-if($_SESSION['login']!=true)
+if($_SESSION['login']!=true) 
 {
 	header("Location:connexion.php");
+}
+if($_SESSION['type']!='client')
+{
+	header("Location:index.php");
 }
 ?>
 

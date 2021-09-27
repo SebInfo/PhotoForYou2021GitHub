@@ -39,16 +39,15 @@ Il sera donc important de se démarquer de ces concurrents en se basant sur la n
 
 ### Description du contenu
 
-- enregistrement sur le site en tant que photographe ou client.
-- la désinscription (cela entraine la perte des crédits et pour un photographe.
-- le retrait de toutes ses photos du catalogue)
-- catalogue des photos à vendre classer par catégorie.
-- photos en promotion ou photos vedettes (les plus regardés ou qui correspondent au contexte) en première page.
-- moteur de recherche rapide, avancé/multicritères
-- gestion du caddie
-- les photos achetées sont archivées chez le client et téléchargeables à tous moments
+- Enregistrement sur le site en tant que photographe ou client.
+- La désinscription (cela entraine la perte des crédits et pour un photographe et le retrait de toutes ses photos du catalogue)
+- Catalogue des photos à vendre classer par catégorie.
+- Photos en promotion ou photos vedettes (les plus regardés ou qui correspondent au contexte) en première page.
+- Moteur de recherche rapide, avancé/multicritères
+- Gestion du caddie
+- Les photos achetées sont archivées chez le client et téléchargeables à tous moments
 - Mise en place automatique d’un filigrane lors de la mise en ligne de photo.
-Le photographe fixe le prix de vente en nombre de crédit. (minimum 2 crédits-maximum 100 crédits)
+- Le photographe fixe le prix de vente en nombre de crédit. (minimum 2 crédits-maximum 100 crédits)
 - Les photos sont en vente de manière exclusive (un seul achat après retrait du catalogue)
 - L’achat se fait à partir de crédits que l’on doit acheter.  (1 crédit = 5 euros)
 
@@ -56,7 +55,7 @@ Le photographe fixe le prix de vente en nombre de crédit. (minimum 2 crédits-m
 
 ## Exigences fonctionnelles
 
-1. Pricipales composantes
+1. Principales composantes
 - Gestion des utilisateurs
 - Identification des utilisateurs
 - Gestion de l'espace client/photographe

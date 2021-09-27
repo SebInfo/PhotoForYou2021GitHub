@@ -71,7 +71,7 @@ include ("include/entete.inc.php");
     <!-- Choix entre Client ou Photographe -->
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-info">
-        <input type="radio" name="choixType" id="client" value="client">
+        <input type="radio" name="choixType" id="client" value="client" checked>
         Client
       </label>
       <label class="btn btn-info">
@@ -79,15 +79,7 @@ include ("include/entete.inc.php");
         Photographe
       </label>
     </div>
-
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="emailPromo">
-        <label class="form-check-label" for="emailPromo">
-          Oui, je veux recevoir des sources d’inspiration visuelles, des offres spéciales et autres communications par e-mail. 
-        </label>
-      </div>
-    </div>
+    <br/>
     <input type="submit" value="Valider"  class="btn btn-primary" name="valider" />
   </form>
 </div>

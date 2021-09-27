@@ -17,10 +17,13 @@ if (isset($_POST['identifier']))
   {
       // On récupère le prénom pour le message d'acceuil
       $_SESSION['login'] = true;
-      $query = "SELECT Prenom as Prenom from PhotoForYou2.users where Mail = '$mail';";
+      $query = "SELECT * from PhotoForYou2.users where Mail = '$mail';";
       $requete = $db->query($query);
       $result = $requete->fetch();
-      $_SESSION['NomUtilisateur'] = htmlentities($result['Prenom']);
+      $_SESSION['prenomUtilisateur'] = htmlentities($result['Prenom']);
+      $_SESSION['nomUtilisateur'] = htmlentities($result['Nom']);
+      $_SESSION['emailUtilisateur'] = htmlentities($result['Mail']);
+      $_SESSION['type'] = htmlentities ($result['Type']);
       unset($result);
       header('Location: membres.php');
   }
