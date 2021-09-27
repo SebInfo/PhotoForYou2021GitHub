@@ -11,7 +11,7 @@
     <p class="lead">Des pros au service des professionnels de la communication.</p>
   </div>
 	<!-- Carrousel -->
-	<div id="row carouselExampleControls" class="carousel slide" data-ride="carousel">
+	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   		<div class="carousel-inner">
     		<div class="carousel-item active">
      			<img src="images/carrousel/carrousel1.png" class="d-block w-100" alt="...">
