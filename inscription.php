@@ -9,9 +9,11 @@ include ("include/entete.inc.php");
     <hr class="my-4">
     <p>Vous ferez bientôt parti de nos membres. Vous avez fait le bon choix ;-)</p>
   </div>
+  <img src="" id="photo"  width=20% class="img-responsive float-right" >
+
 
   <!-- Formulaire d'inscription -->
-  <form  method="post" action="ajoutUser.php"  id="form"  novalidate>
+  <form  method="post" action="ajoutUser.php"  id="form"  enctype="multipart/form-data" novalidate>
     <div class="form-group row">
       <div class="col-md-4 mb-3">
         <label for="prenom">Prénom</label>
@@ -36,6 +38,13 @@ include ("include/entete.inc.php");
         </div>
       </div>
     </div>
+    <div class="form-group row">
+      <div class="col-md-4 mb-3">
+        <label for="nom">Photo</label>
+        <input type="file" onchange="actuPhoto(this)" id="photoUser" name="photoUser" accept="image/jpeg, image/png, image/gif">
+      </div>
+    </div>
+
     <div class="form-group row">
       <div class="col-md-4 mb-3">
         <label for="email">Adresse électronique</label>
@@ -71,14 +80,45 @@ include ("include/entete.inc.php");
     <!-- Choix entre Client ou Photographe -->
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-info">
-        <input type="radio" name="choixType" id="client" value="client" checked>
+        <input type="radio" name="choixType" id="client" value="client" onchange="aff_cach_input('client')" checked>
         Client
       </label>
       <label class="btn btn-info">
-        <input type="radio" name="choixType" id="Photographe" value="photographe">
+        <input type="radio" name="choixType" id="photographe" onchange="aff_cach_input('photographe')" value="photographe">
         Photographe
       </label>
     </div>
+
+    <!-- Partie Photographe -->
+        
+    <div id="blockPhotographe">
+      <p class="lead">Partie photographe</p>
+      <div class="form">
+        <label for="siteWeb" id="siteWeb">Site Web</label>
+        <div class="form-group">
+          <input type="url" class="form-control col-md-3" name="siteWeb" id="siteWeb">
+        </div>
+        <label for="siret" id="siteWeb">Numéro de siret</label>
+        <div class="form-group">
+          <input type="text" class="form-control col-md-3" name="siret" id="siret" placeholder="Exemple : 12345678900013" pattern="[0-9]{14}" >
+        </div>
+        <div class="invalid-feedback">
+            Le numéro de SIRET est obligatoire et ce présente sous cette forme 12345678900013
+        </div>
+      </div>
+    </div> 
+
+    <!-- Partie Client -->
+    <div id="blockClient">
+      <p class="lead">Partie client</p>
+      <div class="form">
+          <label for="indice">Date de naissance</label>
+          <input type="date" class="form-control col-md-3" name="dateNaissance" required>
+          <div class="invalid-feedback">
+            La date de naissance est obligatoire
+          </div>
+      </div>
+    </div> 
     <br/>
     <input type="submit" value="Valider"  class="btn btn-primary" name="valider" />
   </form>
@@ -86,14 +126,45 @@ include ("include/entete.inc.php");
 
 <script>
 
-function validationMotDePasse() {
-    $motDePasse1=document.getElementById("motdepasse1").value;
-    console.log($motDePasse1);
-    $motDePasse2=document.getElementById("motdepasse2").value;
-    if ($motDePasse1 != $motDePasse2)
-    {
-      document.getElementById("erreurMotDePasse").value="Erreur";
-    }
+function actuPhoto(element)
+{
+  var image=document.getElementById("photoUser");
+  var fReader = new FileReader();
+  fReader.readAsDataURL(image.files[0]);
+  fReader.onloadend = function(event)
+  {
+    var img = document.getElementById("photo");
+    img.src = event.target.result;
+  }
+}
+
+aff_cach_input('client');
+
+function aff_cach_input(action)
+{ 
+  if (action == "photographe") 
+  {
+      document.getElementById('blockPhotographe').style.display="inline"; 
+      document.getElementById('blockClient').style.display="none"; 
+  }
+  else if (action == "client")
+  {
+      document.getElementById('blockPhotographe').style.display="none"; 
+      document.getElementById('blockClient').style.display="inline"; 
+  }
+  return true;
+}
+
+
+function validationMotDePasse() 
+{
+  $motDePasse1=document.getElementById("motdepasse1").value;
+  console.log($motDePasse1);
+  $motDePasse2=document.getElementById("motdepasse2").value;
+  if ($motDePasse1 != $motDePasse2)
+  {
+    document.getElementById("erreurMotDePasse").value="Erreur";
+  }
 }
 
 var mail=document.getElementById("email");

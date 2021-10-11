@@ -23,6 +23,8 @@ if (isset($_POST['identifier']))
       $_SESSION['prenomUtilisateur'] = htmlentities($result['Prenom']);
       $_SESSION['nomUtilisateur'] = htmlentities($result['Nom']);
       $_SESSION['emailUtilisateur'] = htmlentities($result['Mail']);
+      $_SESSION['credit'] = htmlentities($result['Credit']);
+      $_SESSION['photo'] = "images/".htmlentities($result['Photo']);
       $_SESSION['type'] = htmlentities ($result['Type']);
       unset($result);
       header('Location: membres.php');
