@@ -113,7 +113,7 @@ include ("include/entete.inc.php");
       <p class="lead">Partie client</p>
       <div class="form">
           <label for="indice">Date de naissance</label>
-          <input type="date" class="form-control col-md-3" name="dateNaissance" required>
+          <input type="date" class="form-control col-md-3" name="dateNaissance">
           <div class="invalid-feedback">
             La date de naissance est obligatoire
           </div>
